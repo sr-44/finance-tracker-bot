@@ -1,13 +1,12 @@
 <?php
 
-/** @var Nutgram $bot */
 
-use App\Telegram\Commands\StartCommand;
-use App\Telegram\Middleware\AnswerLocale;
-use App\Telegram\Handlers\RegisterUser;
+
+use App\Telegram\Handlers\CancelHandler;
+use App\Telegram\Middleware\RegisterUser;
 use SergiX44\Nutgram\Nutgram;
 
-
+/** @var Nutgram $bot */
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +18,5 @@ use SergiX44\Nutgram\Nutgram;
 |
 */
 
-$bot->middleware(AnswerLocale::class);
-//$bot->middleware(RegisterUser::class);
-
-$bot->onCallbackQueryData('setlang|{lang}', RegisterUser::class);
-//$bot->onCommand('start', StartCommand::class)->description('The start command!');
+$bot->middleware(RegisterUser::class);
+$bot->onCommand('start', CancelHandler::class);
