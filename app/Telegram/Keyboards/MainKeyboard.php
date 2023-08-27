@@ -20,7 +20,7 @@ class MainKeyboard
             KeyboardButton::make(__('texts.kbd.profile'))
         );
         $markup->addRow(
-            KeyboardButton::make(__('texts.kbd.info'))
+            KeyboardButton::make(__('texts.kbd.help'))
         );
 
         return $markup;
