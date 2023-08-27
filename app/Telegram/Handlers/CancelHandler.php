@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Telegram\Handlers;
+
+use App\Telegram\Keyboards\MainKeyboard;
 use SergiX44\Nutgram\Nutgram;
 
 class CancelHandler
@@ -15,7 +17,6 @@ class CancelHandler
         $bot->endConversation();
 
         $bot->sendMessage(
-            __('texts.start', ['name' => $bot->user()->first_name])
-        );
+            __('texts.start', ['name' => $bot->user()->first_name]), reply_markup: MainKeyboard::mainMenu());
     }
 }
