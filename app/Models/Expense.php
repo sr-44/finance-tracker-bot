@@ -14,6 +14,10 @@ class Expense extends Model
         'amount',
         'category',
         'description',
+        'created_at',
         
     ];
+   
+    public $timestamps = false;
+
 }
