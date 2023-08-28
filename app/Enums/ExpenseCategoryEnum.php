@@ -14,4 +14,11 @@ class ExpenseCategoryEnum
     public const GIFTS = 'gifts';
     public const ELECTRONICS = 'electronics';
     public const ETC = 'etc';
+
+
+    public static function getAll(): array
+    {
+        $reflectionClass = new \ReflectionClass(__CLASS__);
+        return array_values($reflectionClass->getConstants());
+    }
 }

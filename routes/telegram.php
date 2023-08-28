@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ExpenseCategoryEnum;
 use App\Telegram\Commands\ShowHelpCommand;
 use App\Telegram\Commands\ShowProfileCommand;
 use App\Telegram\Conversations\AddExpenseConversation;

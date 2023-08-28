@@ -4,7 +4,23 @@ return [
     'welcome' => 'Добро пожаловать в бот, :name. Бот поможет вам отслежевать ваши финансы. Выберите нужное вам меню ниже',
     'start' => 'Доброго времени суток, :name, выберите нужное меню',
     'help' => 'mdkmk',
+
+    'expenses.menu' => 'Тут вы можете добавить свои расходы в течении дня.
+Ваши недавно добавленные отчеты:
+:recent
+
+Добавьте сумму в виде цифр. Например: 990',
+
+    'incomes.menu' => 'Тут вы можете добавить свои доходы в течении дня.
+Ваши недавно добавленные отчеты:
+:recent
+
+Добавьте сумму в виде цифр. Например: 9900',
+
+    'expenses.choose_category' => 'Пожалуйста выберите категорию',
+    'expenses.set_description' => 'Пожалуйста введите описание вашего расхода. Если хотите оставить пустым, тогда отправьте 0',
     'profile' => 'это ваш кабинет',
+    'numeric_pls' => 'Пожалуйста введите число',
     'task.name' => 'Введите название задачи',
     'task.type' => 'Принято, теперь выберите тип задачи',
     'task.deadline' => "Выберите дату дедлайна (необязательно)",
@@ -44,4 +60,21 @@ return [
     'kbd.close' => 'Закрыт ❌',
     'kbd.notification' => 'Уведомление :status',
 
+
+    //Категория доходов и расходов
+    'expenses.category.food' => 'еда',
+    'expenses.category.transport'=> 'транспорт',
+    'expenses.category.housing' => 'жилье',
+    'expenses.category.health' => 'здоровье',
+    'expenses.category.travel' => 'путешествие',
+    'expenses.category.education' => 'образование',
+    'expenses.category.hobbies' => 'хобби',
+    'expenses.category.gifts' => 'подарки',
+    'expenses.category.electronics' => 'электроника',
+    'expenses.category.etc'  => 'прочее',
+    
+    'incomes.category.salary'=> 'Зарплата',
+    'incomes.category.sales' => 'Продажи',
+    'incomes.category.etc' => 'Прочее',
+    
 ];
