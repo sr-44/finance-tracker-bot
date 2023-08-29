@@ -4,6 +4,7 @@ namespace App\Telegram\Middleware;
 
 
 use App\Models\User;
+use App\Telegram\Keyboards\MainKeyboard;
 use Carbon\Carbon;
 use SergiX44\Nutgram\Nutgram;
 
@@ -20,9 +21,14 @@ class RegisterUser
                 'username' => $bot->user()->username,
                 'last_activity' => Carbon::now(),
             ]);
-        } else {
-            $user->touch('last_activity');
+
+            $bot->sendMessage(__('texts.welcome', [
+                'name' => $bot->user()->first_name,
+            ]), reply_markup: MainKeyboard::mainMenu());
+            return;
         }
+
+        $user->touch('last_activity');
 
         app()->instance(User::class, $user);
 
