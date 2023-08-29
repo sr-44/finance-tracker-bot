@@ -5,16 +5,21 @@ namespace App\Telegram\Conversations;
 use App\Enums\ExpenseCategoryEnum;
 use App\Models\Expense;
 use App\Models\User;
+use App\Telegram\Commands\ShowActionsCommand;
 use App\Telegram\Handlers\CancelHandler;
 use App\Telegram\Keyboards\MainKeyboard;
 use Carbon\Carbon;
+use Psr\SimpleCache\InvalidArgumentException;
 use SergiX44\Nutgram\Conversations\Conversation;
 use SergiX44\Nutgram\Nutgram;
 use SergiX44\Nutgram\Telegram\Properties\ParseMode;
 
 class AddExpenseConversation extends Conversation
 {
-    public function start(Nutgram $bot)
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function start(Nutgram $bot): void
     {
 
         $bot->sendMessage(
@@ -27,7 +32,10 @@ class AddExpenseConversation extends Conversation
     }
 
 
-    public function setCategory(Nutgram $bot)
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function setCategory(Nutgram $bot): void
     {
         if (!is_numeric($bot->message()->text)) {
             //$this->start($bot);
@@ -45,7 +53,10 @@ class AddExpenseConversation extends Conversation
     }
 
 
-    public function setDescription(Nutgram $bot)
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function setDescription(Nutgram $bot): void
     {
         $bot->answerCallbackQuery();
         $bot->setUserData('expense.category', $bot->callbackQuery()->data);
@@ -54,7 +65,10 @@ class AddExpenseConversation extends Conversation
     }
 
 
-    public function saveExpense(Nutgram $bot)
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function saveExpense(Nutgram $bot): void
     {
         if ($bot->message()->text === null) {
             $this->setDescription($bot);
@@ -70,8 +84,8 @@ class AddExpenseConversation extends Conversation
         ]);
 
 
-        $bot->sendMessage(__('texts.expenses.succes'));
-        (new CancelHandler())($bot);
+        $bot->sendMessage(__('texts.expenses.success'));
+        (new ShowActionsCommand())($bot);
     }
 
 }

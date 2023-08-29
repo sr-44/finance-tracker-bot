@@ -11,9 +11,13 @@ use SergiX44\Nutgram\Telegram\Types\Keyboard\ReplyKeyboardMarkup;
 
 class MainKeyboard
 {
-    public static function mainMenu()
+    public static function mainMenu(): ReplyKeyboardMarkup
     {
         $markup = new ReplyKeyboardMarkup(true, false, __('texts.kbd.select'));
+
+        $markup->addRow(
+            KeyboardButton::make(__('texts.kbd.show_recent_actions'))
+        );
 
         $markup->addRow(
             KeyboardButton::make(__('texts.kbd.add_incomes')),
@@ -56,6 +60,20 @@ class MainKeyboard
         foreach (IncomeCategoryEnum::getAll() as $value) {
             $markup->addRow(InlineKeyboardButton::make(__("texts.incomes.category.$value"), callback_data: $value));
         }
+        return $markup;
+    }
+
+    public static function showActionsMenu(): ReplyKeyboardMarkup
+    {
+        $markup = new ReplyKeyboardMarkup(true, false);
+
+        $markup->addRow(
+            KeyboardButton::make(__('texts.kbd.add_incomes')),
+            KeyboardButton::make(__('texts.kbd.add_expense'))
+        );
+        $markup->addRow(
+            KeyboardButton::make(__('texts.kbd.main'))
+        );
         return $markup;
     }
 }

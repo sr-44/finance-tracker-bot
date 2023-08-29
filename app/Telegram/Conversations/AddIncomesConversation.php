@@ -2,20 +2,21 @@
 
 namespace App\Telegram\Conversations;
 
-use App\Enums\ExpenseCategoryEnum;
-use App\Models\Expense;
 use App\Models\Income;
-use App\Models\User;
-use App\Telegram\Handlers\CancelHandler;
+use App\Telegram\Commands\ShowActionsCommand;
 use App\Telegram\Keyboards\MainKeyboard;
 use Carbon\Carbon;
+use Psr\SimpleCache\InvalidArgumentException;
 use SergiX44\Nutgram\Conversations\Conversation;
 use SergiX44\Nutgram\Nutgram;
 use SergiX44\Nutgram\Telegram\Properties\ParseMode;
 
 class AddIncomesConversation extends Conversation
 {
-    public function start(Nutgram $bot)
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function start(Nutgram $bot): void
     {
 
         $bot->sendMessage(
@@ -28,7 +29,10 @@ class AddIncomesConversation extends Conversation
     }
 
 
-    public function setCategory(Nutgram $bot)
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function setCategory(Nutgram $bot): void
     {
         if (!is_numeric($bot->message()->text)) {
             $bot->sendMessage(__('texts.numeric_pls'));
@@ -41,12 +45,15 @@ class AddIncomesConversation extends Conversation
             parse_mode: ParseMode::HTML,
             reply_markup: MainKeyboard::incomesCategoryMenu()
         );
-        
+
         $this->next('setDescription');
     }
 
 
-    public function setDescription(Nutgram $bot)
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function setDescription(Nutgram $bot): void
     {
         $bot->answerCallbackQuery();
         $bot->setUserData('incomes.category', $bot->callbackQuery()->data);
@@ -55,6 +62,9 @@ class AddIncomesConversation extends Conversation
     }
 
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function saveExpense(Nutgram $bot)
     {
         if ($bot->message()->text === null) {
@@ -71,8 +81,8 @@ class AddIncomesConversation extends Conversation
         ]);
 
 
-        $bot->sendMessage(__('texts.incomes.succes'));
-        (new CancelHandler())($bot);
+        $bot->sendMessage(__('texts.incomes.success'));
+        (new ShowActionsCommand())($bot);
     }
 
 }
