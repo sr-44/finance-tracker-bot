@@ -60,7 +60,7 @@ return [
         'telegram' => [
             'driver' => 'custom',
             'via' => \Nutgram\Laravel\Log\NutgramLogger::class,
-            'level' => 'debug',
+            'level' => env('LOG_LEVEL', 'debug'),
             'chat_id' => env('NUTGRAM_LOG_CHAT_ID'),
         ],
         'single' => [
