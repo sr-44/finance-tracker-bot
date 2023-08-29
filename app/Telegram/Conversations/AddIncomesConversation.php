@@ -72,6 +72,11 @@ class AddIncomesConversation extends Conversation
             return;
         }
 
+        if (mb_strlen($bot->message()->text) >= 50) {
+            $bot->sendMessage(__('texts.limit_description'));
+            return;
+        }
+
         Income::create([
             'user_id' => $bot->userId(),
             'amount' => $bot->getUserData('incomes.amount'),

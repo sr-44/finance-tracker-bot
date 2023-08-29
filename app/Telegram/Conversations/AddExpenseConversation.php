@@ -75,6 +75,11 @@ class AddExpenseConversation extends Conversation
             return;
         }
 
+        if (mb_strlen($bot->message()->text) >= 50) {
+            $bot->sendMessage(__('texts.limit_description'));
+            return;
+        }
+
         Expense::create([
             'user_id' => $bot->userId(),
             'amount' => $bot->getUserData('expense.amount'),

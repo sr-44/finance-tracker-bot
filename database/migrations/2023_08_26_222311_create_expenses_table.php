@@ -30,7 +30,7 @@ return new class extends Migration {
             ]);
 
 
-            $table->text('description')->nullable();
+            $table->string('description', 50)->nullable();
             $table->timestamp('created_at')->nullable();
 
 
