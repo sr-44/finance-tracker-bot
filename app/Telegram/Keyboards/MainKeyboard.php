@@ -68,6 +68,10 @@ class MainKeyboard
         $markup = new ReplyKeyboardMarkup(true, false);
 
         $markup->addRow(
+            KeyboardButton::make(__('texts.kbd.show.incomes')),
+            KeyboardButton::make(__('texts.kbd.show.expenses')));
+
+        $markup->addRow(
             KeyboardButton::make(__('texts.kbd.add_incomes')),
             KeyboardButton::make(__('texts.kbd.add_expense'))
         );
