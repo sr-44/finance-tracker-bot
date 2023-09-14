@@ -18,7 +18,7 @@ class ShowIncomesConversations extends Conversation
      */
     public function start(Nutgram $bot): void
     {
-        $this->showActions($bot->getUserData('page.expenses', default: 1));
+        $this->showActions($bot->getUserData('page.incomes', default: 1));
     }
 
     /**
@@ -100,7 +100,7 @@ class ShowIncomesConversations extends Conversation
             return;
         }
         $step = explode('_', $bot->callbackQuery()->data)[0];
-        $currentPage = (int)$bot->getUserData('page.expenses', default: 1);
+        $currentPage = (int)$bot->getUserData('page.incomes', default: 1);
 
         if ($step === 'next') {
             $currentPage++;
@@ -112,6 +112,6 @@ class ShowIncomesConversations extends Conversation
         }
 
         $this->showActions($currentPage, true);
-        $bot->setUserData('page.expenses', $currentPage);
+        $bot->setUserData('page.incomes', $currentPage);
     }
 }
